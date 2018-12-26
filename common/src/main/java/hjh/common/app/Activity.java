@@ -99,6 +99,7 @@ public abstract class Activity extends AppCompatActivity {
         // 得到当前Activity下的所有Fragment
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
 
+
         // 判断是否为空
         if(fragments != null && fragments.size() > 0){
             for(Fragment fragment : fragments){

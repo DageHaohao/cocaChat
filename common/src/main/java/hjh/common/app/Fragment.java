@@ -8,9 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public abstract class Fragment extends android.support.v4.app.Fragment {
 
     protected View mRoot;
+
+    protected Unbinder mRootUnBinder;
 
     @Override
     public void onAttach(Context context) {
@@ -69,6 +74,8 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
      */
     protected void initWidget(View root) {
 
+        mRootUnBinder = ButterKnife.bind(this,root);
+
     }
 
     /**
@@ -85,8 +92,6 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
      * 返回False代表我没有处理逻辑，Activity自己走自己的逻辑
      */
     public boolean onBackPressed(){
-
-
         return false;
     }
 

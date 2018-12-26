@@ -25,12 +25,27 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':common')
+
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    implementation "com.android.support:design:$rootProject.ext.supportVersion"
+
+    //qiujuer老师的UI包
+    api "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
+    api "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
+
+    //circleimageview圆形头像包
+    implementation "de.hdodenhof:circleimageview:$rootProject.ext.circleimageviewVersion"
+
+    //glide图片加载框架
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    //annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
 
     //butterknife
     implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
