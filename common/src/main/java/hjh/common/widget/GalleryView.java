@@ -29,7 +29,7 @@ import hjh.common.R;
 import hjh.common.widget.recycler.RecyclerAdapter;
 
 
-public class GalleyView extends RecyclerView {
+public class GalleryView extends RecyclerView {
 
     private Adapter mAdapter = new Adapter();
 
@@ -46,17 +46,17 @@ public class GalleyView extends RecyclerView {
     private static final int MIN_IMAGE_FILE_SIZE = 10 * 1024; // 最小的图片大小
 
 
-    public GalleyView(Context context) {
+    public GalleryView(Context context) {
         super(context);
         init();
     }
 
-    public GalleyView(Context context, AttributeSet attrs) {
+    public GalleryView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public GalleyView(Context context, AttributeSet attrs, int defStyle) {
+    public GalleryView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -217,7 +217,7 @@ public class GalleyView extends RecyclerView {
 
         @Override
         protected ViewHolder<Image> onCreateViewHolder(android.view.View root, int viewType) {
-            return new GalleyView.ViewHolder(root);
+            return new GalleryView.ViewHolder(root);
         }
 
     }

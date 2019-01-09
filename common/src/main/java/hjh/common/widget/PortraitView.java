@@ -14,7 +14,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class PortraitView extends CircleImageView {
 
-
     public PortraitView(Context context) {
         super(context);
     }

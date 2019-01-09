@@ -4,13 +4,13 @@ package hjh.cocachat.frags.main;
 import butterknife.BindView;
 import hjh.cocachat.R;
 import hjh.common.app.Fragment;
-import hjh.common.widget.GalleyView;
+import hjh.common.widget.GalleryView;
 
 
 public class ActiveFragment extends Fragment {
 
-    @BindView(R.id.galleyView)
-    GalleyView mGalley;
+    @BindView(R.id.galleryView)
+    GalleryView mGalley;
 
 
     public ActiveFragment() {
@@ -24,16 +24,4 @@ public class ActiveFragment extends Fragment {
     }
 
 
-    /*@Override
-    protected void initData() {
-        super.initData();
-
-        mGalley.setup(getLoaderManager(), new GalleyView.SelectedChangeListener() {
-            @Override
-            public void onSelectedCountChanged(int count) {
-
-            }
-        });
-
-    }*/
 }

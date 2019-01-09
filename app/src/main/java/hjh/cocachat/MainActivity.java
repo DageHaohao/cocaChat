@@ -24,6 +24,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import hjh.cocachat.activities.AccountActivity;
 import hjh.cocachat.frags.main.ActiveFragment;
 import hjh.cocachat.frags.main.ContactFragment;
 import hjh.cocachat.frags.main.GroupFragment;
@@ -110,8 +111,10 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
 
     @OnClick(R.id.btn_action)
     void onActionClick(){
-
+        AccountActivity.show(this);
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -165,8 +168,5 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
                 .setInterpolator(new AnticipateOvershootInterpolator(1))
                 .setDuration(480)
                 .start();
-
-
-
     }
 }

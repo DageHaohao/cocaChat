@@ -11,17 +11,21 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/*
+fragment封装基类
+ */
+
 public abstract class Fragment extends android.support.v4.app.Fragment {
 
+    //根布局
     protected View mRoot;
 
+    //bind操作
     protected Unbinder mRootUnBinder;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-
         // 初始化参数
         initArgs(getArguments());
     }
@@ -32,7 +36,7 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
 
         if(mRoot==null) {
             int layId = getContentLayoutId();
-            // 初始化当前的跟布局，但是不在创建时就添加到container里边
+            // 初始化当前的根布局，但是不在创建时就添加到container里边
             View root = inflater.inflate(layId, container, false);
 
             initWidget(root);
