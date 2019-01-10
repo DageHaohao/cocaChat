@@ -36,6 +36,7 @@ dependencies {
     //qiujuer老师的UI包
     api "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
     api "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
+    api "net.qiujuer.genius:kit-handler:$rootProject.ext.geniusVersion"
     //circleimageview圆形头像包
     implementation "de.hdodenhof:circleimageview:$rootProject.ext.circleimageviewVersion"
     //glide图片加载框架

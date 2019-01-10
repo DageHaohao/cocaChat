@@ -1,6 +1,11 @@
 package hjh.common.app;
 
 import android.os.SystemClock;
+import android.support.annotation.StringRes;
+import android.widget.Toast;
+
+import net.qiujuer.genius.kit.handler.Run;
+import net.qiujuer.genius.kit.handler.runable.Action;
 
 import java.io.File;
 
@@ -89,7 +94,7 @@ public class Application extends android.app.Application {
      *
      * @param msg 字符串
      */
-/*    public static void showToast(final String msg) {
+    public static void showToast(final String msg) {
         // Toast 只能在主线程中显示，所有需要进行线程转换，
         // 保证一定是在主线程进行的show操作
         Run.onUiAsync(new Action() {
@@ -100,15 +105,15 @@ public class Application extends android.app.Application {
             }
         });
 
-    }*/
+    }
 
     /**
      * 显示一个Toast
      *
      * @param msgId 传递的是字符串的资源
      */
-   /* public static void showToast(@StringRes int msgId) {
+   public static void showToast(@StringRes int msgId) {
         showToast(instance.getString(msgId));
-    }*/
+    }
 
 }
