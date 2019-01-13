@@ -1,6 +1,8 @@
-package hjh.cocachat;
+package hjh.cocachat.activities;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -24,7 +26,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import hjh.cocachat.activities.AccountActivity;
+import hjh.cocachat.R;
 import hjh.cocachat.frags.main.ActiveFragment;
 import hjh.cocachat.frags.main.ContactFragment;
 import hjh.cocachat.frags.main.GroupFragment;
@@ -53,6 +55,15 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
     FloatActionButton mAction;
 
     private NavHelper<Integer> mNavHelper;
+
+    /**
+     * MainActivity 显示的入口
+     *
+     * @param context 上下文
+     */
+    public static void show(Context context){
+        context.startActivity(new Intent(context,MainActivity.class));
+    }
 
 
     @Override
@@ -87,7 +98,6 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
 
                     }
                 });
-
 
     }
 
