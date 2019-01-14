@@ -34,5 +34,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //OSS储存库
-    implementation "com.aliyun.dpa:oss-android-sdk:$rootProject.ext.ossVersion"
+    //implementation "com.aliyun.dpa:oss-android-sdk:$rootProject.ext.ossVersion"
+    implementation 'com.aliyun.dpa:oss-android-sdk:+'
 }

@@ -4,8 +4,11 @@ package hjh.cocachat.frags.account;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
+import com.example.factory.Factory;
+import com.example.factory.net.UploadHelper;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -99,5 +102,19 @@ public class UpdateInfoFragment extends Fragment {
                 .centerCrop()
                 .into(mPortrait);
 
+        // 拿到本地文件的地址
+        final String localPath = uri.getPath();
+        Log.e("TAG", "localPath:" + localPath);
+
+        Factory.runOnAsync(new Runnable() {
+            @Override
+            public void run() {
+                String url = UploadHelper.uploadPortrait(localPath);
+                Log.e("TAG", "url:" + url);
+            }
+        });
     }
 }
+
+
+
