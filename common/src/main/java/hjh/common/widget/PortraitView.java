@@ -11,6 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @ProjectName cocaChat
  * @Description: TODO
  * @date 2018/12/25
+ * 圆形头像
  */
 public class PortraitView extends CircleImageView {
 

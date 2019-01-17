@@ -1,4 +1,4 @@
-package hjh.cocachat.frags.account;
+package hjh.cocachat.frags.user;
 
 
 import android.content.Intent;

@@ -36,4 +36,15 @@ dependencies {
     //OSS储存库
     //implementation "com.aliyun.dpa:oss-android-sdk:$rootProject.ext.ossVersion"
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
+
+    //retrofit网络请求库
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    //retrofit2 gson转换器
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    //gson库
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+
+    // android support annotations注解库
+    implementation 'com.android.support:support-annotations:20.0.0'
+
 }
