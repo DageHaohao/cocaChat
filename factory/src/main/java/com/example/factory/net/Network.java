@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Network {
 
+    //获取一个静态的Network实例
     private static Network instance;
 
     private Retrofit retrofit;
@@ -38,7 +39,6 @@ public class Network {
     }
 
     // 构建一个Retrofit
-
     public static Retrofit getRetrofit(){
         if(instance.retrofit!=null)
             return instance.retrofit;
