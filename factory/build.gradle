@@ -47,4 +47,10 @@ dependencies {
     // android support annotations注解库
     implementation 'com.android.support:support-annotations:20.0.0'
 
+    //dbflow数据库框架
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${rootProject.ext.dbflowVersion}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${rootProject.ext.dbflowVersion}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:${rootProject.ext.dbflowVersion}"
+
+
 }
