@@ -1,9 +1,12 @@
 package com.example.factory.data.helper;
 
+import android.text.TextUtils;
+
 import com.example.factory.Factory;
 import com.example.factory.R;
 import com.example.factory.modle.api.RspModel;
 import com.example.factory.modle.api.account.AccountRspModel;
+import com.example.factory.modle.api.account.LoginModel;
 import com.example.factory.modle.api.account.RegisterModel;
 import com.example.factory.modle.db.User;
 import com.example.factory.net.Network;
@@ -41,6 +44,40 @@ public class AccountHelper {
     }
 
 
+    /**
+     * 对设备Id进行绑定的操作
+     *
+     * @param callback Callback
+     */
+    public static void bindPush(final DataSource.Callback<User> callback) {
+        // 检查是否为空
+        String pushId = Account.getPushId();
+        if (TextUtils.isEmpty(pushId))
+            return;
+
+
+        // 调用Retrofit对我们的网络请求接口做代理
+        RemoteService service = Network.remote();
+        Call<RspModel<AccountRspModel>> call = service.accountBind(pushId);
+        call.enqueue(new AccountRspCallback(callback));
+    }
+
+    /**
+     * 登录的调用
+     *
+     * @param model    登录的Model
+     * @param callback 成功与失败的接口回送
+     */
+    public static void login(final LoginModel model,final DataSource.Callback<User> callback){
+        // 调用Retrofit对我们的网络请求接口做代理
+        RemoteService service = Network.remote();
+        // 得到一个Call
+        Call<RspModel<AccountRspModel>> call = service.accountLogin(model);
+        // 异步的请求
+        call.enqueue(new AccountRspCallback(callback));
+    }
+
+
 
     /**
      * 请求的回调部分封装
@@ -66,7 +103,7 @@ public class AccountHelper {
                 // 获取我的信息
                 User user = accountRspModel.getUser();
                 // 第一种，直接保存
-                //user.save();
+                user.save();
 
                 /*
                     // 第二种通过ModelAdapter
@@ -98,7 +135,7 @@ public class AccountHelper {
                         callback.onDataLoaded(user);
                     }else {
                         // 进行绑定的唤起
-                        //bindPush(callback);
+                        bindPush(callback);
                     }
 
                 }else {

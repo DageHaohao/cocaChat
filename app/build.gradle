@@ -24,7 +24,7 @@ android {
         ]
 
         // 个推 so 库 需要 CPU 架构
-        ndk {
+       ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86_64"
         }
     }

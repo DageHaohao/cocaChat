@@ -2,11 +2,16 @@ package com.example.factory.net;
 
 import com.example.factory.modle.api.RspModel;
 import com.example.factory.modle.api.account.AccountRspModel;
+import com.example.factory.modle.api.account.LoginModel;
 import com.example.factory.modle.api.account.RegisterModel;
+import com.example.factory.modle.api.user.UserUpdateModel;
+import com.example.factory.modle.card.UserCard;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 /**
  * @author 91319
@@ -28,6 +33,30 @@ public interface RemoteService {
      */
     @POST("account/register")
     Call<RspModel<AccountRspModel>> accountRegister(@Body RegisterModel model);
+
+    /**
+     * 登录接口
+     *
+     * @param model LoginModel
+     * @return RspModel<AccountRspModel>
+     */
+    @POST("account/login")
+    Call<RspModel<AccountRspModel>> accountLogin(@Body LoginModel model);
+
+    /**
+     * 绑定设备Id
+     *
+     * @param pushId 设备Id
+     * @return RspModel<AccountRspModel>
+     */
+    @POST("account/bind/{pushId}")
+    Call<RspModel<AccountRspModel>> accountBind(@Path(encoded = true, value = "pushId") String pushId);
+
+    // 用户更新的接口
+    @PUT("user")
+    Call<RspModel<UserCard>> userUpdate(@Body UserUpdateModel model);
+
+
 
 
 }

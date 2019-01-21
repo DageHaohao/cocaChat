@@ -6,11 +6,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.factory.presenter.account.LoginContract;
+import com.example.factory.presenter.account.LoginPresenter;
 
 import net.qiujuer.genius.ui.widget.Loading;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import hjh.cocachat.R;
+import hjh.cocachat.activities.MainActivity;
 import hjh.common.app.Fragment;
 import hjh.common.app.PresenterFragment;
 
@@ -47,7 +50,7 @@ public class LoginFragment extends PresenterFragment<LoginContract.Presenter>
 
     @Override
     protected LoginContract.Presenter initPresenter() {
-        return null;
+        return new LoginPresenter(this);
     }
 
     @Override
@@ -55,16 +58,50 @@ public class LoginFragment extends PresenterFragment<LoginContract.Presenter>
         return R.layout.fragment_login;
     }
 
+    @OnClick(R.id.btn_submit)
+    void onSubmitClick() {
+        String phone = mPhone.getText().toString();
+        String password = mPassword.getText().toString();
+        // 调用P层进行登录
+        mPresenter.login(phone, password);
+    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //进行一次切换 默认切换为注册界面
+
+    @OnClick(R.id.txt_go_register)
+    void onShowRegisterClick(){
         mAccountTrigger.triggerView();
     }
 
     @Override
-    public void loginSuccess() {
+    public void showError(int str) {
+        super.showError(str);
+        // 当需要显示错误的时候触发，一定是结束了
 
+        // 停止Loading
+        mLoading.stop();
+        // 让控件可以输入
+        mPhone.setEnabled(true);
+        mPassword.setEnabled(true);
+        // 提交按钮可以继续点击
+        mSubmit.setEnabled(true);
+    }
+
+    @Override
+    public void showLoading() {
+        super.showLoading();
+        // 正在进行时，正在进行注册，界面不可操作
+        // 开始Loading
+        mLoading.start();
+        // 让控件不可以输入
+        mPhone.setEnabled(false);
+        mPassword.setEnabled(false);
+        // 提交按钮不可以继续点击
+        mSubmit.setEnabled(false);
+    }
+
+    @Override
+    public void loginSuccess() {
+        MainActivity.show(getContext());
+        getActivity().finish();
     }
 }

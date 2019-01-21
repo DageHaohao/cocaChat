@@ -3,8 +3,12 @@ package com.example.factory;
 import android.support.annotation.StringRes;
 
 import com.example.factory.modle.api.RspModel;
+import com.example.factory.persistence.Account;
+import com.example.factory.utils.DBFlowExclusionStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -36,14 +40,14 @@ public class Factory {
                 // 设置时间格式
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
                 // 设置一个过滤器，数据库级别的Model不进行Json转换
-                //.setExclusionStrategies(new DBFlowExclusionStrategy())
+                .setExclusionStrategies(new DBFlowExclusionStrategy())
                 .create();
     }
 
     /**
      * Factory 中的初始化
      */
-   /* public static void setup() {
+   public static void setup() {
         // 初始化数据库
         FlowManager.init(new FlowConfig.Builder(app())
                 .openDatabasesOnInit(true) // 数据库初始化的时候就开始打开
@@ -51,7 +55,7 @@ public class Factory {
 
         // 持久化的数据进行初始化
         Account.load(app());
-    }*/
+    }
 
     /**
      * 返回全局的Application
@@ -159,7 +163,7 @@ public class Factory {
      * 收到账户退出的消息需要进行账户退出重新登录
      */
     private void logout() {
-
+        // TODO: 2019/1/21 收到账户退出的消息需要进行账户退出重新登录 
     }
 
 
@@ -169,7 +173,7 @@ public class Factory {
      * @param message 消息
      */
     public static void dispatchPush(String message) {
-        // TODO
+        // TODO 处理推送来的消息
     }
 
 }

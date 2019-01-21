@@ -80,6 +80,7 @@ public class Account {
         Account.save(Factory.app());
     }
 
+
     /**
      * 获取推送Id
      *

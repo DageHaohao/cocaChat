@@ -18,7 +18,6 @@ public interface RegisterContract {
     }
 
 
-
     interface Presenter extends BaseContract.Presenter{
         // 发起一个注册
         void register(String phone,String name,String password);
