@@ -10,6 +10,8 @@ import com.raizlabs.android.dbflow.structure.ModelAdapter;
  * @ProjectName cocaChat
  * @Description: TODO
  * @date 2019/1/21
+ *
+ * 一个自定义的过滤器 dbflow的过滤器要自己写
  */
 public class DBFlowExclusionStrategy implements ExclusionStrategy {
 

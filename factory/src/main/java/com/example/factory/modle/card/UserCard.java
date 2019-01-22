@@ -112,7 +112,8 @@ public class UserCard {
         this.modifyAt = modifyAt;
     }
 
-    // 缓存一个对应的User, 不能被GSON框架解析使用ø
+    //如果用transient声明一个实例变量，当对象存储时，它的值不需要维持
+    // 缓存一个对应的User, 不能被GSON框架解析使用
     private transient User user;
 
     public User build() {
@@ -128,6 +129,7 @@ public class UserCard {
             user.setFollows(follows);
             user.setFollowing(following);
             user.setModifyAt(modifyAt);
+            //赋值
             this.user = user;
         }
         return user;

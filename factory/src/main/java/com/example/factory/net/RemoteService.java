@@ -56,7 +56,4 @@ public interface RemoteService {
     @PUT("user")
     Call<RspModel<UserCard>> userUpdate(@Body UserUpdateModel model);
 
-
-
-
 }

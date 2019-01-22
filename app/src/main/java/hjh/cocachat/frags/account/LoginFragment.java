@@ -76,7 +76,6 @@ public class LoginFragment extends PresenterFragment<LoginContract.Presenter>
     public void showError(int str) {
         super.showError(str);
         // 当需要显示错误的时候触发，一定是结束了
-
         // 停止Loading
         mLoading.stop();
         // 让控件可以输入

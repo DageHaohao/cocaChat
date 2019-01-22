@@ -68,7 +68,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
         final LoginContract.View view = getView();
         if (view == null)
             return;
-        // 此时是从网络回送回来的，并不保证处于主现场状态
+        // 此时是从网络回送回来的，并不保证处于主线程状态
         // 强制执行在主线程中
         Run.onUiAsync(new Action() {
             @Override

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
+import com.example.factory.persistence.Account;
 
 import net.qiujuer.genius.ui.Ui;
 import net.qiujuer.genius.ui.widget.FloatActionButton;
@@ -34,7 +36,8 @@ import hjh.cocachat.helper.NavHelper;
 import hjh.common.app.Activity;
 import hjh.common.widget.PortraitView;
 
-public class MainActivity extends Activity implements BottomNavigationView.OnNavigationItemSelectedListener,NavHelper.OnTabChangedListener<Integer> {
+public class MainActivity extends Activity implements BottomNavigationView.OnNavigationItemSelectedListener
+        ,NavHelper.OnTabChangedListener<Integer> {
 
     @BindView(R.id.appbar)
     View mLayAppbar;
@@ -65,6 +68,16 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
         context.startActivity(new Intent(context,MainActivity.class));
     }
 
+    @Override
+    protected boolean initArgs(Bundle bundle) {
+        // 判断用户信息是否完全，完全则走正常流程
+        if(Account.isComplete()){
+            return super.initArgs(bundle);
+        }else {
+            UserActivity.show(this);
+            return false;
+        }
+    }
 
     @Override
     protected int getContentLayoutId() {
@@ -83,6 +96,7 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
                 .add(R.id.action_group, new NavHelper.Tab<>(GroupFragment.class, R.string.title_group))
                 .add(R.id.action_contact, new NavHelper.Tab<>(ContactFragment.class, R.string.title_contact));
 
+        // 添加对底部按钮点击的监听
         mNavigation.setOnNavigationItemSelectedListener(this);
 
 
@@ -116,20 +130,20 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
 
     @OnClick(R.id.im_search)
     void onSearchMenuClick(){
-
+        
     }
 
     @OnClick(R.id.btn_action)
     void onActionClick(){
         AccountActivity.show(this);
+        // TODO: 2019/1/21 添加联系人 添加群聊 
     }
 
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-
+        // 转接事件流到工具类中
         return mNavHelper.performClickMenu(menuItem.getItemId());
     }
 

@@ -119,11 +119,14 @@ implements GalleryView.SelectedChangeListener{
             int statusHeight = UiTool.getStatusBarHeight(getOwnerActivity());
 
             // 计算dialog的高度并设置
-            int dialogHeight = screenHeight - statusHeight;
-            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                    dialogHeight <= 0 ? ViewGroup.LayoutParams.MATCH_PARENT : dialogHeight);
+            //int dialogHeight = screenHeight - statusHeight;
+            //int dialogHeight = screenHeight;
+            /*window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
+                    dialogHeight <= 0 ? ViewGroup.LayoutParams.MATCH_PARENT : dialogHeight);*/
+
+            // TODO: 2019/1/22  解决权限申请时和选择图片时 全面屏手机因为没有导航栏 下方导航栏部分留白
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         }
     }
-
 
 }

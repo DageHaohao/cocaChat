@@ -3,22 +3,28 @@ package hjh.cocachat.frags.user;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.factory.Factory;
-import com.example.factory.net.UploadHelper;
+import com.example.factory.presenter.user.UpdateInfoContract;
+import com.example.factory.presenter.user.UpdateInfoPresenter;
 import com.yalantis.ucrop.UCrop;
+
+import net.qiujuer.genius.ui.widget.Loading;
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import hjh.cocachat.R;
+import hjh.cocachat.activities.MainActivity;
 import hjh.cocachat.frags.media.GalleryFragment;
 import hjh.common.app.Application;
-import hjh.common.app.Fragment;
+import hjh.common.app.PresenterFragment;
 import hjh.common.widget.PortraitView;
 
 import static android.app.Activity.RESULT_OK;
@@ -26,11 +32,27 @@ import static android.app.Activity.RESULT_OK;
 /**
  * 用户更新信息的界面
  */
-public class UpdateInfoFragment extends Fragment {
+public class UpdateInfoFragment extends PresenterFragment<UpdateInfoContract.Presenter>
+        implements UpdateInfoContract.View {
+
+    @BindView(R.id.im_sex)
+    ImageView mSex;
+
+    @BindView(R.id.edit_desc)
+    EditText mDesc;
 
     @BindView(R.id.im_portrait)
     PortraitView mPortrait;
 
+    @BindView(R.id.loading)
+    Loading mLoading;
+
+    @BindView(R.id.btn_submit)
+    Button mSubmit;
+
+    // 头像的本地路径
+    private String mPortraitPath;
+    private boolean isMan = true;
 
     public UpdateInfoFragment() {
         // Required empty public constructor
@@ -84,7 +106,7 @@ public class UpdateInfoFragment extends Fragment {
             }
 
         } else if (resultCode == UCrop.RESULT_ERROR) {
-            final Throwable cropError = UCrop.getError(data);
+            Application.showToast(R.string.data_rsp_error_unknown);
         }
     }
 
@@ -96,23 +118,78 @@ public class UpdateInfoFragment extends Fragment {
      */
     private void loadPortrait(Uri uri) {
 
+        // 得到头像地址
+        mPortraitPath = uri.getPath();
+
         Glide.with(this)
                 .load(uri)
                 .asBitmap()
                 .centerCrop()
                 .into(mPortrait);
+    }
 
-        // 拿到本地文件的地址
-        final String localPath = uri.getPath();
-        Log.e("TAG", "localPath:" + localPath);
 
-        Factory.runOnAsync(new Runnable() {
-            @Override
-            public void run() {
-                String url = UploadHelper.uploadPortrait(localPath);
-                Log.e("TAG", "url:" + url);
-            }
-        });
+
+    // TODO: 2019/1/22 性别切换按钮点击事件
+    @OnClick(R.id.im_sex)
+    void onSexClick(){
+        // 性别图片点击的时候触发
+        isMan = !isMan; // 反向性别
+        Drawable drawable = getResources().getDrawable(isMan?
+                R.drawable.ic_sex_man : R.drawable.ic_sex_woman);
+        mSex.setImageDrawable(drawable);
+        // 设置背景的层级，切换颜色
+        mSex.getBackground().setLevel(isMan ? 0 : 1);
+    }
+
+    // TODO: 2019/1/22 确认按钮点击事件
+    @OnClick(R.id.btn_submit)
+    void onSubmitClick(){
+        String desc = mDesc.getText().toString();
+        // 调用P层进行注册
+        mPresenter.update(mPortraitPath, desc, isMan);
+    }
+
+    @Override
+    public void showError(int str) {
+        super.showError(str);
+        // 当需要显示错误的时候触发，一定是结束了
+        // 停止Loading
+        mLoading.stop();
+        // 让控件可以输入
+        mDesc.setEnabled(true);
+        mPortrait.setEnabled(true);
+        mSex.setEnabled(true);
+        // 提交按钮可以继续点击
+        mSubmit.setEnabled(true);
+
+    }
+
+    @Override
+    public void showLoading() {
+        super.showLoading();
+        // 正在进行时，正在进行注册，界面不可操作
+        // 开始Loading
+        mLoading.start();
+        // 让控件不可以输入
+        mDesc.setEnabled(false);
+        mPortrait.setEnabled(false);
+        mSex.setEnabled(false);
+        // 提交按钮不可以继续点击
+        mSubmit.setEnabled(false);
+
+    }
+
+    @Override
+    public void updateSucceed() {
+        // 更新成功跳转到主界面
+        MainActivity.show(getContext());
+        getActivity().finish();
+    }
+
+    @Override
+    protected UpdateInfoContract.Presenter initPresenter() {
+        return new UpdateInfoPresenter(this);
     }
 }
 

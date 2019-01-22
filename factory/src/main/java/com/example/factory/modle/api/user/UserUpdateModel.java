@@ -4,7 +4,7 @@ package com.example.factory.modle.api.user;
  * @author 91319
  * @Title: UserUpdateModel
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: TODO 用户更新信息所用的modle
  * @date 2019/1/18
  */
 public class UserUpdateModel {

@@ -5,6 +5,9 @@ import java.util.Date;
 /**
  * @author huangjuhao
  * @version 1.0.0
+ *
+ * 状态码的modle
+ *
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class RspModel<T> {

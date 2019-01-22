@@ -96,20 +96,17 @@ public class AccountHelper {
             // 请求成功返回
             // 从返回中得到我们的全局Model，内部是使用的Gson进行解析
             RspModel<AccountRspModel> rspModel = response.body();
-            if(rspModel.success()){
-
+            if (rspModel.success()) {
                 // 拿到实体
                 AccountRspModel accountRspModel = rspModel.getResult();
                 // 获取我的信息
                 User user = accountRspModel.getUser();
-                // 第一种，直接保存
+                // 第一种，之间保存
                 user.save();
-
-                /*
+                    /*
                     // 第二种通过ModelAdapter
                     FlowManager.getModelAdapter(User.class)
                             .save(user);
-
 
                     // 第三种，事务中
                     DatabaseDefinition definition = FlowManager.getDatabase(AppDatabase.class);
@@ -121,28 +118,23 @@ public class AccountHelper {
                         }
                     }).build().execute();
                     */
-
-
                 // 同步到XML持久化中
                 Account.login(accountRspModel);
 
                 // 判断绑定状态，是否绑定设备
-                if(accountRspModel.isBind()){
+                if (accountRspModel.isBind()) {
                     // 设置绑定状态为True
                     Account.setBind(true);
                     // 然后返回
-                    if(callback!=null){
+                    if (callback != null)
                         callback.onDataLoaded(user);
-                    }else {
-                        // 进行绑定的唤起
-                        bindPush(callback);
-                    }
-
-                }else {
-                    // 错误解析
-                    Factory.decodeRspCode(rspModel, callback);
+                } else {
+                    // 进行绑定的唤起
+                    bindPush(callback);
                 }
-
+            } else {
+                // 错误解析
+                Factory.decodeRspCode(rspModel, callback);
             }
         }
 

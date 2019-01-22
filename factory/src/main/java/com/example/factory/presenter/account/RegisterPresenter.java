@@ -109,7 +109,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View>
 
         if(view==null)
             return;
-
+        // 此时是从网络回送回来的，并不保证处于主现场状态
+        // 强制执行在主线程中
         Run.onUiAsync(new Action() {
             @Override
             public void call() {
