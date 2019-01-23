@@ -17,14 +17,14 @@ android {
 
         //个推相关参数
         manifestPlaceholders = [
-                GETUI_APP_ID : "OmTgg87Hf57DiAzvWdAe34",
-                GETUI_APP_KEY : "thNeGUPDo86Q4tYct2MI61",
+                GETUI_APP_ID    : "OmTgg87Hf57DiAzvWdAe34",
+                GETUI_APP_KEY   : "thNeGUPDo86Q4tYct2MI61",
                 GETUI_APP_SECRET: "X0fn2kV3qz8yP8sq7m6TJ5",
-                PACKAGE_NAME : applicationId
+                PACKAGE_NAME    : applicationId
         ]
 
         // 个推 so 库 需要 CPU 架构
-       ndk {
+        ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86_64"
         }
     }

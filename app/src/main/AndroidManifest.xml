@@ -29,19 +29,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--个推的广播注册-->
-        <receiver android:name=".MessageReceiver"
-                  android:enabled="true"
-                  android:exported="true"
-                  android:permission="1000">
+        <!-- 个推的广播注册 -->
+        <receiver
+            android:name=".MessageReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="1000">
             <intent-filter>
-
-                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}" />
-
+                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
             </intent-filter>
         </receiver>
 
-        <!--个推的服务注册-->
+        <!-- 个推的服务注册 -->
         <service
             android:name=".PushService"
             android:exported="true"
@@ -50,7 +49,7 @@
         </service>
 
         <!-- 接收并处理 个推 消息的 service -->
-        <!-- 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复-->
+        <!-- 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复 -->
         <service android:name=".PushIntentService"/>
 
         <activity
@@ -82,8 +81,12 @@
             android:name=".activities.UserActivity"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Account">
-        </activity>
+            android:theme="@style/AppTheme.Account"/>
+        <activity
+            android:name=".activities.SearchActivity"
+            android:label="@string/title_search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar"/>
     </application>
 
 </manifest>
