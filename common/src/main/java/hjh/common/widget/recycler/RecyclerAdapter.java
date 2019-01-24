@@ -132,6 +132,15 @@ public abstract class RecyclerAdapter<Data>
     }
 
     /**
+     * 返回整个集合
+     *
+     * @return List<Data>
+     */
+    public List<Data> getItems() {
+        return mDataList;
+    }
+
+    /**
      * 插入一条数据并通知插入
      *
      * @param data Data
@@ -236,6 +245,7 @@ public abstract class RecyclerAdapter<Data>
     public void setListener(AdapterListener<Data> adapterListener) {
         this.mListener = adapterListener;
     }
+
 
     /**
      * 我们的自定义监听器

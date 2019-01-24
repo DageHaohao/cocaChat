@@ -37,6 +37,8 @@ dependencies {
     //implementation "com.aliyun.dpa:oss-android-sdk:$rootProject.ext.ossVersion"
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
 
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+
     //retrofit网络请求库
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     //retrofit2 gson转换器
@@ -48,9 +50,11 @@ dependencies {
     implementation 'com.android.support:support-annotations:20.0.0'
 
     //dbflow数据库框架
+    //使用implementation关键字可能导致可能导致了生成的方法后续的依赖module无法访问的情况
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${rootProject.ext.dbflowVersion}"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${rootProject.ext.dbflowVersion}"
-    implementation "com.github.Raizlabs.DBFlow:dbflow:${rootProject.ext.dbflowVersion}"
+    api "com.github.Raizlabs.DBFlow:dbflow-core:${rootProject.ext.dbflowVersion}"
+    api "com.github.Raizlabs.DBFlow:dbflow:${rootProject.ext.dbflowVersion}"
+
 
 
 }

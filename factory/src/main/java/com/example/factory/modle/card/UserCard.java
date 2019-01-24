@@ -4,6 +4,8 @@ import com.example.factory.modle.db.User;
 
 import java.util.Date;
 
+import hjh.factory.modle.Author;
+
 /**
  * @author 91319
  * @Title: UserCard
@@ -11,7 +13,7 @@ import java.util.Date;
  * @Description: TODO
  * @date 2019/1/17
  */
-public class UserCard {
+public class UserCard implements Author {
 
     private String id;
     private String name;

@@ -7,6 +7,8 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
 
+import hjh.factory.modle.Author;
+
 /**
  * @author 91319
  * @Title: User
@@ -15,7 +17,7 @@ import java.util.Date;
  * @date 2019/1/17
  */
 @Table(database = AppDatabase.class)
-public class User extends BaseModel {
+public class User extends BaseModel implements Author {
 
     public static final int SEX_MAN = 1;
     public static final int SEX_WOMAN = 2;
