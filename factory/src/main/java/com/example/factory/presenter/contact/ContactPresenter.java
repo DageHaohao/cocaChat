@@ -1,6 +1,7 @@
 package com.example.factory.presenter.contact;
 
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 
 import com.example.factory.data.helper.UserHelper;
 import com.example.factory.modle.card.UserCard;
@@ -8,6 +9,7 @@ import com.example.factory.modle.db.AppDatabase;
 import com.example.factory.modle.db.User;
 import com.example.factory.modle.db.User_Table;
 import com.example.factory.persistence.Account;
+import com.example.factory.utils.DiffUiDataCallback;
 import com.raizlabs.android.dbflow.config.DatabaseDefinition;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -60,7 +62,7 @@ public class ContactPresenter extends BasePresenter<ContactContract.View>
                 })
                 .execute();
 
-        // 加载网络数据
+        // 加载网络数据 传递一个回调
         UserHelper.refreshContacts(new DataSource.Callback<List<UserCard>>() {
             @Override
             public void onDataNotAvailable(int strRes) {
@@ -89,7 +91,7 @@ public class ContactPresenter extends BasePresenter<ContactContract.View>
                 // 网络的数据往往是新的，我们需要直接刷新到界面
                 List<User> old = getView().getRecyclerAdapter().getItems();
                 // 会导致数据顺序全部为新的数据集合
-                // getView().getRecyclerAdapter().replace(users);
+                //getView().getRecyclerAdapter().replace(users);
                 diff(old,users);
 
             }
@@ -101,13 +103,20 @@ public class ContactPresenter extends BasePresenter<ContactContract.View>
         // 3.本地刷新和网络刷新，在添加到界面的时候会有可能冲突；导致数据显示异常
         // 4.如何识别已经在数据库中有这样的数据了
 
-        
     }
-
 
     private void diff(List<User> oldList, List<User> newList) {
+        // 进行数据对比
+        DiffUtil.Callback callback = new DiffUiDataCallback<>(oldList, newList);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
 
-        // TODO: 2019/1/24 进行数据对比
+        // 在对比完成后进行数据的赋值
+        getView().getRecyclerAdapter().replace(newList);
 
+        // 尝试刷新界面
+        result.dispatchUpdatesTo(getView().getRecyclerAdapter());
+        getView().onAdapterDataChanged();
     }
+
+
 }
