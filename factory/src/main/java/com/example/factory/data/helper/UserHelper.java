@@ -6,8 +6,10 @@ import com.example.factory.modle.api.RspModel;
 import com.example.factory.modle.api.user.UserUpdateModel;
 import com.example.factory.modle.card.UserCard;
 import com.example.factory.modle.db.User;
+import com.example.factory.modle.db.User_Table;
 import com.example.factory.net.Network;
 import com.example.factory.net.RemoteService;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
@@ -145,5 +147,60 @@ public class UserHelper  {
                 });
 
     }
+
+    // 从本地查询一个用户的信息
+    public static User findFromLocal(String id){
+        return SQLite.select()
+                .from(User.class)
+                .where(User_Table.id.eq(id))
+                .querySingle();
+    }
+
+    // 从网络查询一个用户的信息
+    public static User findFromNet(String id){
+        RemoteService remoteService = Network.remote();
+        try {
+            Response<RspModel<UserCard>> response = remoteService.userFind(id).execute();
+            UserCard card = response.body().getResult();
+            if (card != null) {
+
+                // TODO 数据库的存储但是没有通知
+                User user = card.build();
+                user.save();
+
+                return user;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * 搜索一个用户，优先本地缓存，
+     * 没有用然后再从网络拉取
+     */
+    public static User search(String id) {
+        User user = findFromLocal(id);
+        if (user == null) {
+            return findFromNet(id);
+        }
+        return user;
+    }
+
+    /**
+     * 搜索一个用户，优先网络查询
+     * 没有用然后再从本地缓存拉取
+     */
+    public static User searchFirstOfNet(String id) {
+        User user = findFromNet(id);
+        if (user == null) {
+            return findFromLocal(id);
+        }
+        return user;
+    }
+
 
 }

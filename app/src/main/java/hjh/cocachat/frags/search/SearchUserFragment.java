@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import hjh.cocachat.R;
+import hjh.cocachat.activities.PersonalActivity;
 import hjh.cocachat.activities.SearchActivity;
 import hjh.common.app.PresenterFragment;
 import hjh.common.widget.EmptyView;
@@ -136,7 +137,8 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
 
         @OnClick(R.id.im_portrait)
         void onPortraitClick(){
-            // TODO: 2019/1/24 点击头像 显示个人信息
+            // TODO: 2019/1/25 点击头像显示个人信息
+            PersonalActivity.show(getContext(),mdata.getId());
         }
 
         @OnClick(R.id.im_follow)

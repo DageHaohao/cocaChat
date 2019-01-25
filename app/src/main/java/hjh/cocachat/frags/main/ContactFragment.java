@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import hjh.cocachat.R;
 import hjh.cocachat.activities.MessageActivity;
+import hjh.cocachat.activities.PersonalActivity;
 import hjh.common.app.PresenterFragment;
 import hjh.common.widget.EmptyView;
 import hjh.common.widget.PortraitView;
@@ -123,8 +124,9 @@ public class ContactFragment extends PresenterFragment<ContactContract.Presenter
         }
 
         @OnClick(R.id.im_portrait)
-        void onPortraitClick() {
-            // TODO: 2019/1/24 显示联系人详细信息
+        void onPortraitClick(){
+            // TODO: 2019/1/25 点击头像显示个人信息
+            PersonalActivity.show(getContext(),mdata.getId());
         }
     }
 }
