@@ -10,11 +10,10 @@ import hjh.factory.modle.Author;
  * @author 91319
  * @Title: UserCard
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: TODO 用户卡片，用于接收服务器返回
  * @date 2019/1/17
  */
 public class UserCard implements Author {
-
     private String id;
     private String name;
     private String phone;
@@ -114,8 +113,7 @@ public class UserCard implements Author {
         this.modifyAt = modifyAt;
     }
 
-    //如果用transient声明一个实例变量，当对象存储时，它的值不需要维持
-    // 缓存一个对应的User, 不能被GSON框架解析使用
+    // 缓存一个对应的User, 不能被GSON框架解析使用ø
     private transient User user;
 
     public User build() {
@@ -131,10 +129,8 @@ public class UserCard implements Author {
             user.setFollows(follows);
             user.setFollowing(following);
             user.setModifyAt(modifyAt);
-            //赋值
             this.user = user;
         }
         return user;
     }
-
 }

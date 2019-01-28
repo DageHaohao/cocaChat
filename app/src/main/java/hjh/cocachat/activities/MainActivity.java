@@ -201,7 +201,6 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
         }
 
 
-
         // 开始动画
         // 旋转，Y轴位移，弹性差值器，时间
         mAction.animate()
