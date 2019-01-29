@@ -41,10 +41,8 @@ public class UserHelper  {
                 RspModel<UserCard> rspModel = response.body();
                 if (rspModel.success()) {
                     UserCard userCard = rspModel.getResult();
-                    // 数据库的存储操作，需要把UserCard转换为User
-                    // 保存用户信息
-                    User user = userCard.build();
-                    user.save();
+                    // 唤起进行保存的操作
+                    Factory.getUserCenter().dispatch(userCard);
                     // 返回成功
                     callback.onDataLoaded(userCard);
                 } else {
@@ -103,11 +101,8 @@ public class UserHelper  {
                 RspModel<UserCard> rspModel = response.body();
                 if(rspModel.success()){
                     UserCard userCard = rspModel.getResult();
-                    // 保存到本地数据库
-                    User user = userCard.build();
-                    user.save();
-                    // TODO 通知联系人列表刷新
-
+                    // 唤起进行保存的操作
+                    Factory.getUserCenter().dispatch(userCard);
                     // 返回数据
                     callback.onDataLoaded(userCard);
                 }else {
@@ -124,7 +119,10 @@ public class UserHelper  {
 
     }
 
-    // 刷新联系人的操作
+    // 刷新联系人的操作，不需要Callback，直接存储到数据库，
+    // 并通过数据库观察者进行通知界面更新，
+    // 界面更新的时候进行对比，然后差异更新
+    // TODO: 2019/1/29 等待更改差异更新请求 
     public static void refreshContacts(final DataSource.Callback<List<UserCard>> callback){
         RemoteService service = Network.remote();
         service.userContacts()
@@ -143,6 +141,7 @@ public class UserHelper  {
                     @Override
                     public void onFailure(Call<RspModel<List<UserCard>>> call, Throwable t) {
                         callback.onDataNotAvailable(R.string.data_network_error);
+                        // nothing
                     }
                 });
 
@@ -163,11 +162,9 @@ public class UserHelper  {
             Response<RspModel<UserCard>> response = remoteService.userFind(id).execute();
             UserCard card = response.body().getResult();
             if (card != null) {
-
-                // TODO 数据库的存储但是没有通知
                 User user = card.build();
-                user.save();
-
+                //数据库的存储并通知
+                Factory.getUserCenter().dispatch(card);
                 return user;
             }
 

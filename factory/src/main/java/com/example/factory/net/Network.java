@@ -26,10 +26,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Network {
 
-    //获取一个静态的Network实例
-    private static Network instance;
-
     private Retrofit retrofit;
+
+    //获取一个静态的Network实例(单例模式)
+    private static Network instance;
 
     static {
         instance = new Network();
