@@ -23,7 +23,8 @@ import hjh.common.widget.PortraitView;
 import hjh.common.widget.recycler.RecyclerAdapter;
 
 
-public class ContactFragment extends PresenterFragment<ContactContract.Presenter> implements ContactContract.View {
+public class ContactFragment extends PresenterFragment<ContactContract.Presenter>
+        implements ContactContract.View {
 
     @BindView(R.id.empty)
     EmptyView mEmptyView;
@@ -51,7 +52,8 @@ public class ContactFragment extends PresenterFragment<ContactContract.Presenter
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycler.setAdapter(mAdapter = new RecyclerAdapter<User>() {
             @Override
-            protected int getItemViewType(int position, User user) {
+            protected int getItemViewType(int position, User userCard) {
+                // 返回cell的布局id
                 return R.layout.cell_contact_list;
             }
 

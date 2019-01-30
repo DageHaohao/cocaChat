@@ -29,15 +29,14 @@ import java.util.Set;
  * @date 2019/1/28
  */
 public class DbHelper {
-
-    //构造一个单利
     private static final DbHelper instance;
 
     static {
         instance = new DbHelper();
     }
 
-    private DbHelper(){}
+    private DbHelper() {
+    }
 
     /**
      * 观察者的集合
@@ -60,6 +59,7 @@ public class DbHelper {
         return null;
     }
 
+
     /**
      * 添加一个监听
      *
@@ -73,11 +73,12 @@ public class DbHelper {
         if (changedListeners == null) {
             // 初始化某一类型的容器
             changedListeners = new HashSet<>();
-            // 添加到总的Map
+            // 添加到中的Map
             instance.changedListeners.put(tClass, changedListeners);
         }
         changedListeners.add(listener);
     }
+
 
     /**
      * 删除某一个表的某一个监听器
@@ -105,25 +106,22 @@ public class DbHelper {
      * @param <Model> 这个实例的范型，限定条件是BaseModel
      */
     public static <Model extends BaseModel> void save(final Class<Model> tClass,
-                                                      final Model...models){
-
-        if(models==null||models.length==0)
+                                                      final Model... models) {
+        if (models == null || models.length == 0)
             return;
 
         // 当前数据库的一个管理者
         DatabaseDefinition definition = FlowManager.getDatabase(AppDatabase.class);
-        // 提交一个事务
+        // 提交一个事物
         definition.beginTransactionAsync(new ITransaction() {
             @Override
             public void execute(DatabaseWrapper databaseWrapper) {
-
                 // 执行
                 ModelAdapter<Model> adapter = FlowManager.getModelAdapter(tClass);
                 // 保存
                 adapter.saveAll(Arrays.asList(models));
                 // 唤起通知
                 instance.notifySave(tClass, models);
-
             }
         }).build().execute();
     }
@@ -142,7 +140,7 @@ public class DbHelper {
 
         // 当前数据库的一个管理者
         DatabaseDefinition definition = FlowManager.getDatabase(AppDatabase.class);
-        // 提交一个事务
+        // 提交一个事物
         definition.beginTransactionAsync(new ITransaction() {
             @Override
             public void execute(DatabaseWrapper databaseWrapper) {
@@ -164,17 +162,17 @@ public class DbHelper {
      * @param models  通知的Model数组
      * @param <Model> 这个实例的范型，限定条件是BaseModel
      */
-    @SuppressWarnings("unchecked")
     private final <Model extends BaseModel> void notifySave(final Class<Model> tClass,
                                                             final Model... models) {
         // 找监听器
         final Set<ChangedListener> listeners = getListeners(tClass);
-        if(listeners!=null&&listeners.size()>0){
+        if (listeners != null && listeners.size() > 0) {
+            // 通用的通知
             for (ChangedListener<Model> listener : listeners) {
                 listener.onDataSave(models);
             }
         }
-        //列外的情况
+
         // 列外情况
         if (GroupMember.class.equals(tClass)) {
             // 群成员变更，需要通知对应群信息更新
@@ -183,7 +181,6 @@ public class DbHelper {
             // 消息变化，应该通知会话列表更新
             updateSession((Message[]) models);
         }
-
     }
 
     /**
@@ -196,7 +193,6 @@ public class DbHelper {
     @SuppressWarnings("unchecked")
     private final <Model extends BaseModel> void notifyDelete(final Class<Model> tClass,
                                                               final Model... models) {
-
         // 找监听器
         final Set<ChangedListener> listeners = getListeners(tClass);
         if (listeners != null && listeners.size() > 0) {
@@ -214,10 +210,7 @@ public class DbHelper {
             // 消息变化，应该通知会话列表更新
             updateSession((Message[]) models);
         }
-
-
     }
-
 
 
     /**
@@ -225,8 +218,7 @@ public class DbHelper {
      *
      * @param members 群成员列表
      */
-    private void updateGroup(GroupMember... members){
-
+    private void updateGroup(GroupMember... members) {
         // 不重复集合
         final Set<String> groupIds = new HashSet<>();
         for (GroupMember member : members) {
@@ -247,9 +239,9 @@ public class DbHelper {
 
                 // 调用直接进行一次通知分发
                 instance.notifySave(Group.class, groups.toArray(new Group[0]));
+
             }
         }).build().execute();
-
     }
 
     /**
@@ -297,8 +289,6 @@ public class DbHelper {
         }).build().execute();
     }
 
-
-
     /**
      * 通知监听器
      */
@@ -308,6 +298,4 @@ public class DbHelper {
 
         void onDataDelete(Data... list);
     }
-
-
 }

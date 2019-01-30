@@ -1,5 +1,9 @@
 package com.example.factory.data.user;
 
+import com.example.factory.modle.db.User;
+
+import hjh.factory.data.DbDataSource;
+
 /**
  * @author 91319
  * @Title: ContactDataSource
@@ -7,5 +11,7 @@ package com.example.factory.data.user;
  * @Description: TODO 联系人数据源
  * @date 2019/1/29
  */
-public interface ContactDataSource {
+public interface ContactDataSource extends DbDataSource<User> {
+
+
 }

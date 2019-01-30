@@ -19,7 +19,7 @@ import hjh.factory.modle.Author;
  * @date 2019/1/17
  */
 @Table(database = AppDatabase.class)
-public class User extends BaseModel implements Author,DiffUiDataCallback.UiDataDiffer<User> {
+public class User extends BaseDbModel<User> implements Author {
 
     public static final int SEX_MAN = 1;
     public static final int SEX_WOMAN = 2;
@@ -146,22 +146,29 @@ public class User extends BaseModel implements Author,DiffUiDataCallback.UiDataD
         this.modifyAt = modifyAt;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        User user = (User) o;
+        return sex == user.sex
+                && follows == user.follows
+                && following == user.following
+                && isFollow == user.isFollow
+                && Objects.equals(id, user.id)
+                && Objects.equals(name, user.name)
+                && Objects.equals(phone, user.phone)
+                && Objects.equals(portrait, user.portrait)
+                && Objects.equals(desc, user.desc)
+                && Objects.equals(alias, user.alias)
+                && Objects.equals(modifyAt, user.modifyAt);
+    }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", portrait='" + portrait + '\'' +
-                ", desc='" + desc + '\'' +
-                ", sex=" + sex +
-                ", alias='" + alias + '\'' +
-                ", follows=" + follows +
-                ", following=" + following +
-                ", isFollow=" + isFollow +
-                ", modifyAt=" + modifyAt +
-                '}';
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
