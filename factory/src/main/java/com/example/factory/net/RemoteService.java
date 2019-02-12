@@ -4,7 +4,9 @@ import com.example.factory.modle.api.RspModel;
 import com.example.factory.modle.api.account.AccountRspModel;
 import com.example.factory.modle.api.account.LoginModel;
 import com.example.factory.modle.api.account.RegisterModel;
+import com.example.factory.modle.api.message.MsgCreateModel;
 import com.example.factory.modle.api.user.UserUpdateModel;
+import com.example.factory.modle.card.MessageCard;
 import com.example.factory.modle.card.UserCard;
 
 import java.util.List;
@@ -71,7 +73,12 @@ public interface RemoteService {
     @GET("user/contact")
     Call<RspModel<List<UserCard>>> userContacts();
 
+    // 查询某人的信息
     @GET("user/{userId}")
     Call<RspModel<UserCard>> userFind(@Path("userId") String userId);
+
+    // 发送消息的接口
+    @POST("msg")
+    Call<RspModel<MessageCard>> msgPush(@Body MsgCreateModel model);
 
 }

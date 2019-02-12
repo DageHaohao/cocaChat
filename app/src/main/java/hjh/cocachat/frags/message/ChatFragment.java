@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.factory.modle.db.Message;
 import com.example.factory.modle.db.User;
 import com.example.factory.persistence.Account;
+import com.example.factory.presenter.message.ChatContract;
 
 import net.qiujuer.genius.ui.compat.UiCompat;
 import net.qiujuer.genius.ui.widget.Loading;
@@ -31,7 +32,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import hjh.cocachat.R;
 import hjh.cocachat.activities.MessageActivity;
-import hjh.common.app.Fragment;
+import hjh.common.app.PresenterFragment;
 import hjh.common.widget.PortraitView;
 import hjh.common.widget.adapter.TextWatcherAdapter;
 import hjh.common.widget.recycler.RecyclerAdapter;
@@ -43,8 +44,10 @@ import hjh.common.widget.recycler.RecyclerAdapter;
  * @Description: TODO
  * @date 2019/2/1
  */
-public abstract class ChatFragment extends Fragment
-        implements AppBarLayout.OnOffsetChangedListener {
+public abstract class ChatFragment<InitModel>
+        extends PresenterFragment<ChatContract.Presenter>
+        implements AppBarLayout.OnOffsetChangedListener,
+        ChatContract.View<InitModel> {
 
     protected String mReceiverId;
     protected Adapter mAdapter;
@@ -94,6 +97,8 @@ public abstract class ChatFragment extends Fragment
     @Override
     protected void initData() {
         super.initData();
+        // 开始进行初始化操作
+        mPresenter.start();
     }
 
     //设置一个返回按钮 并绑定点击事件
@@ -145,7 +150,9 @@ public abstract class ChatFragment extends Fragment
     void onSubmitClick() {
         if (mSubmit.isActivated()) {
             // 发送
-
+            String content = mContent.getText().toString();
+            mContent.setText("");
+            mPresenter.pushText(content);
         } else {
             onMoreClick();
         }
@@ -153,6 +160,16 @@ public abstract class ChatFragment extends Fragment
 
     private void onMoreClick() {
         // TODO
+    }
+
+    @Override
+    public RecyclerAdapter<Message> getRecyclerAdapter() {
+        return mAdapter;
+    }
+
+    @Override
+    public void onAdapterDataChanged() {
+        // 界面没有占位布局，Recycler是一直显示的，所有不需要做任何事情
     }
 
     // 内容的适配器
@@ -261,10 +278,11 @@ public abstract class ChatFragment extends Fragment
         @OnClick(R.id.im_portrait)
         void onRePushClick(){
             // 重新发送
-            if(mLoading!=null){
+            if(mLoading!=null&&mPresenter.rePush(mdata)){
                 // 必须是右边的才有可能需要重新发送
                 // 状态改变需要重新刷新界面当前的信息
-                // TODO: 2019/2/1 进行重新发送 
+                updateData(mdata);
+
             }
         }
 
