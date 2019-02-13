@@ -15,7 +15,7 @@ import com.igexin.sdk.PushConsts;
  * @author 91319
  * @Title: MessageReceiver
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: TODO 个推的消息接收器
  * @date 2019/1/21
  *
  * 个推的消息的广播接收器
@@ -27,13 +27,11 @@ public class MessageReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        if(intent==null)
+        if (intent == null)
             return;
 
         Bundle bundle = intent.getExtras();
 
-        // 判断当前消息的意图
         // 判断当前消息的意图
         switch (bundle.getInt(PushConsts.CMD_ACTION)) {
             case PushConsts.GET_CLIENTID: {
@@ -57,7 +55,6 @@ public class MessageReceiver extends BroadcastReceiver {
                 Log.i(TAG, "OTHER:" + bundle.toString());
                 break;
         }
-
     }
 
 
@@ -67,15 +64,13 @@ public class MessageReceiver extends BroadcastReceiver {
      * @param cid 设备Id
      */
     private void onClientInit(String cid) {
-
+        // 设置设备Id
         Account.setPushId(cid);
-
-        if(Account.isLogin()){
+        if (Account.isLogin()) {
             // 账户登录状态，进行一次PushId绑定
             // 没有登录是不能绑定PushId的
             AccountHelper.bindPush(null);
         }
-
     }
 
     /**
