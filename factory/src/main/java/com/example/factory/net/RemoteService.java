@@ -4,8 +4,12 @@ import com.example.factory.modle.api.RspModel;
 import com.example.factory.modle.api.account.AccountRspModel;
 import com.example.factory.modle.api.account.LoginModel;
 import com.example.factory.modle.api.account.RegisterModel;
+import com.example.factory.modle.api.group.GroupCreateModel;
+import com.example.factory.modle.api.group.GroupMemberAddModel;
 import com.example.factory.modle.api.message.MsgCreateModel;
 import com.example.factory.modle.api.user.UserUpdateModel;
+import com.example.factory.modle.card.GroupCard;
+import com.example.factory.modle.card.GroupMemberCard;
 import com.example.factory.modle.card.MessageCard;
 import com.example.factory.modle.card.UserCard;
 
@@ -80,5 +84,30 @@ public interface RemoteService {
     // 发送消息的接口
     @POST("msg")
     Call<RspModel<MessageCard>> msgPush(@Body MsgCreateModel model);
+
+    // 创建群
+    @POST("group")
+    Call<RspModel<GroupCard>> groupCreate(@Body GroupCreateModel model);
+
+    // 拉取群信息
+    @GET("group/{groupId}")
+    Call<RspModel<GroupCard>> groupFind(@Path("groupId") String groupId);
+
+    // 群搜索的接口
+    @GET("group/search/{name}")
+    Call<RspModel<List<GroupCard>>> groupSearch(@Path(value = "name", encoded = true) String name);
+
+    // 我的群列表
+    @GET("group/list/{date}")
+    Call<RspModel<List<GroupCard>>> groups(@Path(value = "date", encoded = true) String date);
+
+    // 我的群的成员列表
+    @GET("group/{groupId}/member")
+    Call<RspModel<List<GroupMemberCard>>> groupMembers(@Path("groupId") String groupId);
+
+    // 给群添加成员
+    @POST("group/{groupId}/member")
+    Call<RspModel<List<GroupMemberCard>>> groupMemberAdd(@Path("groupId") String groupId,
+                                                         @Body GroupMemberAddModel model);
 
 }

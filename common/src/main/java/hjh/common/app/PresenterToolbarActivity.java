@@ -45,6 +45,8 @@ public abstract class PresenterToolbarActivity <Presenter extends BaseContract.P
 
     @Override
     public void showError(int str) {
+        // 不管你怎么样，我先隐藏我
+        hideDialogLoading();
         // 显示错误, 优先使用占位布局
         if (mPlaceHolderView != null) {
             mPlaceHolderView.triggerError(str);
