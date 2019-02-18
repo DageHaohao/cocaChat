@@ -14,7 +14,7 @@ import hjh.factory.data.DataSource;
  * @author 91319
  * @Title: ContactRepository
  * @ProjectName cocaChat
- * @Description: TODO 联系人仓库
+ * @Description: 联系人仓库
  * @date 2019/1/29
  */
 public class ContactRepository extends BaseDbRepository<User> implements ContactDataSource {

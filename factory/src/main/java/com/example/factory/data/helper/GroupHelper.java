@@ -228,7 +228,7 @@ public class GroupHelper {
      */
     public static List<MemberUserModel> getMemberUsers(String groupId, int size) {
         return SQLite.select(GroupMember_Table.alias.withTable().as("alias"), //select表示分别要查询哪些列
-                User_Table.id.withTable().as("id"),
+                User_Table.id.withTable().as("userId"),
                 User_Table.name.withTable().as("name"),
                 User_Table.portrait.withTable().as("portrait"))
                 .from(GroupMember.class)

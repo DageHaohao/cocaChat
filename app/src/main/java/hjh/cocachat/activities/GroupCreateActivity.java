@@ -61,6 +61,7 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
         return R.layout.activity_group_create;
     }
 
+    //初始化控件（初始化RecyclerView）
     @Override
     protected void initWidget() {
         super.initWidget();

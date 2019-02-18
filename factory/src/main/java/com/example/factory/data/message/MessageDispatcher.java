@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * @author 91319
  * @Title: MessageDispatcher
  * @ProjectName cocaChat
- * @Description: TODO 消息中心的实现类
+ * @Description: 消息中心的实现类
  * @date 2019/1/29
  */
 public class MessageDispatcher implements MessageCenter {

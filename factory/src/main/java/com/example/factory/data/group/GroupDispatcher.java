@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
  * @author 91319
  * @Title: GroupDispatcher
  * @ProjectName cocaChat
- * @Description: TODO 群／群成员卡片中心的实现类
+ * @Description: 群／群成员卡片中心的实现类
  * @date 2019/1/29
  */
 public class GroupDispatcher implements GroupCenter {

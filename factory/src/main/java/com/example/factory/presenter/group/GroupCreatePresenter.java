@@ -73,8 +73,8 @@ public class GroupCreatePresenter extends BaseRecyclerPresenter<GroupCreateContr
                 if (TextUtils.isEmpty(url))
                     return;
                 // 进行网络请求
-                GroupCreateModel model = new GroupCreateModel(name,desc,picture,users);
-                GroupHelper.create(model,GroupCreatePresenter.this);
+                GroupCreateModel model = new GroupCreateModel(name, desc, url, users);
+                GroupHelper.create(model, GroupCreatePresenter.this);
             }
         });
     }

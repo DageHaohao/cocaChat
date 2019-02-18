@@ -6,7 +6,7 @@ import com.example.factory.modle.card.UserCard;
  * @author 91319
  * @Title: UserCenter
  * @ProjectName cocaChat
- * @Description: TODO 用户中心的基本定义
+ * @Description: 用户中心的基本定义
  * @date 2019/1/29
  */
 public interface UserCenter {

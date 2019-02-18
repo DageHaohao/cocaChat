@@ -15,7 +15,7 @@ import java.util.List;
  * @author 91319
  * @Title: SessionRepository
  * @ProjectName cocaChat
- * @Description: TODO 最近聊天列表仓库，是对SessionDataSource的实现
+ * @Description: 最近聊天列表仓库，是对SessionDataSource的实现
  * @date 2019/2/12
  */
 public class SessionRepository extends BaseDbRepository<Session>

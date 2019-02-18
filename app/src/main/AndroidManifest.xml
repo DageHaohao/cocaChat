@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.GroupMemberActivity"
+            android:label="@string/title_activity_group_member">
+        </activity>
         <!-- 个推的广播注册 -->
         <receiver
             android:name=".MessageReceiver"

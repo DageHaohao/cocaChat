@@ -3,6 +3,9 @@ package com.example.factory.presenter.message;
 import com.example.factory.modle.db.Group;
 import com.example.factory.modle.db.Message;
 import com.example.factory.modle.db.User;
+import com.example.factory.modle.db.view.MemberUserModel;
+
+import java.util.List;
 
 import hjh.factory.presenter.BaseContract;
 
@@ -42,7 +45,11 @@ public interface ChatContract {
 
     // 群聊天的界面
     interface GroupView extends View<Group> {
+        // 显示管理员菜单
+        void showAdminOption(boolean isAdmin);
 
+        // 初始化群成员信息
+        void onInitGroupMembers(List<MemberUserModel> members, long moreCount);
     }
 
 }

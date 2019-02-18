@@ -16,7 +16,7 @@ import java.util.List;
  * @author 91319
  * @Title: MessageRepository
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 消息的仓库
  * @date 2019/2/12
  *
  * 跟某人聊天的时候的聊天列表

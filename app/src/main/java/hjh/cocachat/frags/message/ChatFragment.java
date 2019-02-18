@@ -4,6 +4,7 @@ package hjh.cocachat.frags.message;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,7 +43,7 @@ import hjh.common.widget.recycler.RecyclerAdapter;
  * @author 91319
  * @Title: ChatFragment
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 聊天基础界面
  * @date 2019/2/1
  */
 public abstract class ChatFragment<InitModel>
@@ -79,7 +81,24 @@ public abstract class ChatFragment<InitModel>
     }
 
     @Override
+    protected final int getContentLayoutId() {
+        return R.layout.fragment_chat_common;
+    }
+
+    //得到顶部布局的资源Id 交给子类实现
+    @LayoutRes
+    protected abstract int getHeaderLayoutId();
+
+    @Override
     protected void initWidget(View root) {
+        // 拿到占位布局
+        // 替换顶部布局一定需要发生在super之前
+        // 防止控件绑定异常
+        ViewStub stub = (ViewStub) root.findViewById(R.id.view_stub_header);
+        stub.setLayoutResource(getHeaderLayoutId());
+        stub.inflate();
+
+        //在这里进行了控件的绑定
         super.initWidget(root);
 
         initToolbar();
@@ -90,9 +109,8 @@ public abstract class ChatFragment<InitModel>
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new Adapter();
         mRecyclerView.setAdapter(mAdapter);
-
-
     }
+
 
     @Override
     protected void initData() {
