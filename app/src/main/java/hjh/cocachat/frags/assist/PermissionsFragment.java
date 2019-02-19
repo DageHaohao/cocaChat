@@ -200,6 +200,8 @@ public class PermissionsFragment extends BottomSheetDialogFragment implements Ea
         if (EasyPermissions.hasPermissions(getContext(), perms)) {
             // Fragment 中调用getView得到跟布局，前提是在onCreateView方法之后
             refreshState(getView());
+
+
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.title_assist_permissions),
                     RC, perms);

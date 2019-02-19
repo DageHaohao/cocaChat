@@ -6,7 +6,8 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+
+import net.qiujuer.widget.airpanel.AirPanelLinearLayout;
 
 /**
  * @author 91319
@@ -15,7 +16,7 @@ import android.widget.LinearLayout;
  * @Description: TODO
  * @date 2019/2/1
  */
-public class MessageLayout extends LinearLayout {
+public class MessageLayout extends AirPanelLinearLayout {
     public MessageLayout(Context context) {
         super(context);
     }

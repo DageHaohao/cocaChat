@@ -18,10 +18,9 @@ import hjh.factory.presenter.BasePresenter;
  * @author 91319
  * @Title: LoginPresenter
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 登录的逻辑实现
  * @date 2019/1/17
  *
- * 登录的逻辑实现
  */
 public class LoginPresenter extends BasePresenter<LoginContract.View>
         implements LoginContract.Presenter,DataSource.Callback<User> {

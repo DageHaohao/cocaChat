@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import hjh.cocachat.R;
+import hjh.cocachat.activities.GroupMemberActivity;
 import hjh.cocachat.activities.PersonalActivity;
 
 /**
@@ -175,7 +176,7 @@ public class ChatGroupFragment extends ChatFragment<Group> implements ChatContra
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     if(item.getItemId()==R.id.action_add){
-                        // mReceiverId 就是群的Id
+                        GroupMemberActivity.showAdmin(getContext(),mReceiverId);
                         return true;
                     }
                     return false;

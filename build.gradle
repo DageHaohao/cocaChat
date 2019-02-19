@@ -63,4 +63,8 @@ ext{
     getuiVersion = '2.13.0.0'
     //dbflow数据库框架
     dbflowVersion = "4.0.0-beta7"
+
+    //空气面板
+    airpanelVersion = "1.1.0"
+
 }

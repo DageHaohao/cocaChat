@@ -11,8 +11,11 @@ import java.util.Set;
  * @date 2019/2/15
  */
 public class GroupMemberAddModel {
-
     private Set<String> users = new HashSet<>();
+
+    public GroupMemberAddModel(Set<String> users) {
+        this.users = users;
+    }
 
     public Set<String> getUsers() {
         return users;
@@ -21,5 +24,4 @@ public class GroupMemberAddModel {
     public void setUsers(Set<String> users) {
         this.users = users;
     }
-
 }

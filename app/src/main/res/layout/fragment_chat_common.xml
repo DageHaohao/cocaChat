@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:id="@+id/lay_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.design.widget.CoordinatorLayout
@@ -99,6 +100,23 @@
             android:src="@drawable/ic_submit"
             android:tint="@color/textPrimary" />
     </LinearLayout>
+
+    <!--id是固定的airPanelSubLayout-->
+    <net.qiujuer.widget.airpanel.AirPanelFrameLayout
+        android:id="@id/airPanelSubLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300"
+        android:visibility="gone">
+
+        <fragment
+            android:id="@+id/frag_panel"
+            class="hjh.cocachat.frags.panel.PanelFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </net.qiujuer.widget.airpanel.AirPanelFrameLayout>
 
 
 </hjh.common.widget.MessageLayout>
