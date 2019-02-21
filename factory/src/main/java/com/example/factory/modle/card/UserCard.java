@@ -10,7 +10,7 @@ import hjh.factory.modle.Author;
  * @author 91319
  * @Title: UserCard
  * @ProjectName cocaChat
- * @Description: TODO 用户卡片，用于接收服务器返回
+ * @Description: 用户卡片，用于接收服务器返回
  * @date 2019/1/17
  */
 public class UserCard implements Author {

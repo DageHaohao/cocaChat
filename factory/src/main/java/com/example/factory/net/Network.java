@@ -19,10 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author 91319
  * @Title: Network
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 网络请求的封装
  * @date 2019/1/17
  *
- * 网络请求的封装
  */
 public class Network {
 

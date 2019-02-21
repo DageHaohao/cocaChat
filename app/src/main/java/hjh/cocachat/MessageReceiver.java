@@ -15,7 +15,7 @@ import com.igexin.sdk.PushConsts;
  * @author 91319
  * @Title: MessageReceiver
  * @ProjectName cocaChat
- * @Description: TODO 个推的消息接收器
+ * @Description: 个推的消息接收器
  * @date 2019/1/21
  *
  * 个推的消息的广播接收器

@@ -19,7 +19,8 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro','proguard-rules.pro'
+
         }
     }
 
@@ -49,6 +50,10 @@ dependencies {
     //空气面板
     implementation "net.qiujuer.widget:airpanel:$rootProject.ext.airpanelVersion"
 
+    //gson库
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+
 
     implementation project(':lang')
+    implementation project(':face_res')
 }

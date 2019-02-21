@@ -4,7 +4,7 @@ package hjh.factory.presenter;
  * @author 91319
  * @Title: BasePresenter
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 基本的Presenter 实现类
  * @date 2019/1/17
  */
 public class BasePresenter<T extends BaseContract.View> implements BaseContract.Presenter {

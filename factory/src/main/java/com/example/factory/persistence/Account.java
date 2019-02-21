@@ -14,10 +14,8 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
  * @author 91319
  * @Title: Account
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 数据持久化
  * @date 2019/1/18
- *
- * 数据持久化
  *
  */
 public class Account {

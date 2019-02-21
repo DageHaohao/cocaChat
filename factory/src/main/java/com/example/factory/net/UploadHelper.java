@@ -19,9 +19,8 @@ import hjh.utils.HashUtil;
 /**
  * @author 91319
  * @Title: UploadHelper
- * 上传工具类，用于上传任意文件到阿里OSS存储
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 上传工具类，用于上传任意文件到阿里OSS存储
  * @date 2019/1/14
  */
 public class UploadHelper {

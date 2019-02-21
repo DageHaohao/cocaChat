@@ -8,10 +8,9 @@ import hjh.common.widget.recycler.RecyclerAdapter;
  * @author 91319
  * @Title: BaseContract
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: MVP模式中公共的基本契约
  * @date 2019/1/17
  *
- * MVP模式中公共的基本契约
  */
 public interface BaseContract {
 

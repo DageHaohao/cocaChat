@@ -21,7 +21,7 @@ import hjh.factory.presenter.BasePresenter;
  * @author 91319
  * @Title: RegisterPresenter
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: //注册逻辑实现
  * @date 2019/1/17
  */
 public class RegisterPresenter extends BasePresenter<RegisterContract.View>

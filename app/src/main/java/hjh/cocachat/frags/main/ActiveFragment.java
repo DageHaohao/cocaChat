@@ -4,6 +4,8 @@ package hjh.cocachat.frags.main;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import hjh.common.app.PresenterFragment;
 import hjh.common.widget.EmptyView;
 import hjh.common.widget.PortraitView;
 import hjh.common.widget.recycler.RecyclerAdapter;
+import hjh.face.Face;
 import hjh.utils.DateTimeUtil;
 
 
@@ -123,9 +126,16 @@ public class ActiveFragment extends PresenterFragment<SessionContract.Presenter>
 
         @Override
         protected void onBind(Session session) {
-            mPortraitView.setup(Glide.with(ActiveFragment.this),session.getPicture());
+            mPortraitView.setup(Glide.with(ActiveFragment.this), session.getPicture());
             mName.setText(session.getTitle());
-            mContent.setText(TextUtils.isEmpty(session.getContent())?"":session.getContent());
+
+            String str = TextUtils.isEmpty(session.getContent()) ? "" : session.getContent();
+            Spannable spannable = new SpannableString(str);
+            // 解析表情
+            Face.decode(mContent, spannable, (int) mContent.getTextSize());
+            // 把内容设置到布局上
+            mContent.setText(spannable);
+
             mTime.setText(DateTimeUtil.getSampleDate(session.getModifyAt()));
         }
     }

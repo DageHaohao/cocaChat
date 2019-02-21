@@ -47,6 +47,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
     implementation "com.android.support:design:$rootProject.ext.supportVersion"
+
     //qiujuer老师的UI包
     api "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
     api "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
@@ -67,5 +68,6 @@ dependencies {
 
     //空气面板
     implementation "net.qiujuer.widget:airpanel:$rootProject.ext.airpanelVersion"
+
 
 }

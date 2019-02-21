@@ -26,10 +26,8 @@ import retrofit2.http.Path;
  * @author 91319
  * @Title: RemoteService
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 网络请求的所有的接口
  * @date 2019/1/17
- *
- * 网络请求的所有的接口
  *
  */
 public interface RemoteService {
