@@ -8,7 +8,7 @@ import hjh.factory.presenter.BaseContract;
  * @author 91319
  * @Title: ContactContract
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 联系人契约类
  * @date 2019/1/24
  */
 public interface ContactContract {

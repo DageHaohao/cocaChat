@@ -18,7 +18,7 @@ import hjh.factory.data.DataSource;
  * @author 91319
  * @Title: ContactPresenter
  * @ProjectName cocaChat
- * @Description: TODO 联系人的Presenter实现
+ * @Description: 联系人的Presenter实现
  * @date 2019/1/24
  */
 public class ContactPresenter extends BaseSourcePresenter<User, User, ContactDataSource, ContactContract.View>

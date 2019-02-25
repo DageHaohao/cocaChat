@@ -10,9 +10,8 @@ import android.widget.FrameLayout;
  * @author 黄君豪
  * @Title: SquareLayout
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 正方形控件
  * @date 2018/12/28
- * 正方形控件
  */
 public class SquareLayout extends FrameLayout {
 

@@ -1,5 +1,10 @@
 package com.example.factory.data.helper;
 
+import android.os.SystemClock;
+import android.text.TextUtils;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.example.factory.Factory;
 import com.example.factory.modle.api.RspModel;
 import com.example.factory.modle.api.message.MsgCreateModel;
@@ -8,9 +13,16 @@ import com.example.factory.modle.db.Message;
 import com.example.factory.modle.db.Message_Table;
 import com.example.factory.net.Network;
 import com.example.factory.net.RemoteService;
+import com.example.factory.net.UploadHelper;
 import com.raizlabs.android.dbflow.sql.language.OperatorGroup;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.io.File;
+
+import hjh.common.Common;
+import hjh.common.app.Application;
+import hjh.utils.PicturesCompressor;
+import hjh.utils.StreamUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +31,7 @@ import retrofit2.Response;
  * @author 91319
  * @Title: MessageHelper
  * @ProjectName cocaChat
- * @Description: TODO 消息工具类
+ * @Description: 消息工具类
  * @date 2019/1/29
  */
 public class MessageHelper {
@@ -52,11 +64,47 @@ public class MessageHelper {
                 if (message!=null&&message.getStatus()!=Message.STATUS_FAILED)
                     return;
 
-                // TODO 如果是文件类型的（语音，图片，文件），需要先上传后才发送
-
                 // 我们在发送的时候需要通知界面更新状态，Card;
                 final MessageCard card = model.buildCard();
                 Factory.getMessageCenter().dispatch(card);
+
+                // 发送文件消息分两部：上传到云服务器，消息Push到我们自己的服务器
+                // TODO 如果是文件类型的（语音，图片，文件），需要先上传后才发送
+                if(card.getType()!=Message.TYPE_STR){
+                    // 不是文字类型
+                    if(card.getContent().startsWith(UploadHelper.ENDPOINT)){
+                        // 没有上传到云服务器的，还是本地手机文件
+                        String content;
+
+                        switch (card.getType()){
+                            case Message.TYPE_PIC:
+                                content = uploadPicture(card.getContent());
+                                break;
+
+
+                            case Message.TYPE_AUDIO:
+                                content = uploadAudio(card.getContent());
+                                break;
+
+                            default:
+                                content="";
+                                break;
+                        }
+
+                        if(TextUtils.isEmpty(content)){
+                            // 失败
+                            card.setStatus(Message.STATUS_FAILED);
+                            Factory.getMessageCenter().dispatch(card);
+                        }
+
+                        // 成功则把网络路径进行替换
+                        card.setContent(content);
+                        Factory.getMessageCenter().dispatch(card);
+                        // 因为卡片的内容改变了，而我们上传到服务器是使用的model，
+                        // 所以model也需要跟着更改
+                        model.refreshByCard();
+                    }
+                }
 
                 // 直接发送, 进行网络调度
                 RemoteService service = Network.remote();
@@ -91,6 +139,54 @@ public class MessageHelper {
 
             }
         });
+    }
+
+    // 上传图片
+    private static String uploadPicture(String path){
+
+        File file = null;
+        try{
+            // 通过Glide的缓存区间解决了图片外部权限的问题
+            file = Glide.with(Factory.app())
+                    .load(path)
+                    .downloadOnly(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL)
+                    .get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if(file!=null){
+
+            //进行压缩
+            String cacheDir = Application.getCacheDirFile().getAbsolutePath();
+            String tempFile = String.format("%s/image/Cache_%s.png", cacheDir, SystemClock.uptimeMillis());
+
+            try{
+                // 压缩工具类
+                if(PicturesCompressor.compressImage(file.getAbsolutePath(),tempFile,
+                        Common.Constance.MAX_UPLOAD_IMAGE_LENGTH)){
+
+                    //上传
+                    String ossPath = UploadHelper.uploadImage(tempFile);
+                    //清理缓存
+                    StreamUtil.delete(tempFile);
+
+                    return ossPath;
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
+        return null;
+    }
+
+    // 上传语音
+    private static String uploadAudio(String content) {
+        // TODO 上传语音
+        return null;
     }
 
     /**

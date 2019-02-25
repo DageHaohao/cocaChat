@@ -14,7 +14,7 @@ import hjh.factory.presenter.BasePresenter;
  * @author 91319
  * @Title: PersonalPresenter
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 用户信息逻辑
  * @date 2019/1/25
  */
 public class PersonalPresenter extends BasePresenter<PersonalContract.View>

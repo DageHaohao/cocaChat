@@ -13,6 +13,9 @@ public class Common {
         // 基础的网络请求地址
         String API_URL = "http://10.39.81.216:8080/Gradle___cocaChat_service___cocaChat_service_1_0_SNAPSHOT_war__exploded_/api/";
 
+        // 最大的上传图片大小860kb
+        long MAX_UPLOAD_IMAGE_LENGTH = 860 * 1024;
+
     }
 
 }

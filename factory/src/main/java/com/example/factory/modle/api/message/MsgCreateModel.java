@@ -89,6 +89,10 @@ public class MsgCreateModel {
         return this.card;
     }
 
+    public void refreshByCard() {
+        // TODO: 2019/2/22 根据card 更改 modle 
+    }
+
 
     /**
      * 建造者模式，快速的建立一个发送Model

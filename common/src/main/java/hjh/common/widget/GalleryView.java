@@ -28,6 +28,10 @@ import java.util.List;
 import hjh.common.R;
 import hjh.common.widget.recycler.RecyclerAdapter;
 
+/**
+ * 一个自定义的RecyclerView
+ */
+
 
 public class GalleryView extends RecyclerView {
 

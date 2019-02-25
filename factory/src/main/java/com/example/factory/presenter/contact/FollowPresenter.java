@@ -13,7 +13,7 @@ import hjh.factory.presenter.BasePresenter;
  * @author 91319
  * @Title: FollowPresenter
  * @ProjectName cocaChat
- * @Description: TODO 关注逻辑的实现
+ * @Description: 关注逻辑的实现
  * @date 2019/1/24
  */
 public class FollowPresenter extends BasePresenter<FollowContract.View>

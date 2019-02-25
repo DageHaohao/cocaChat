@@ -28,7 +28,7 @@ public class UploadHelper {
     private static final String TAG = UploadHelper.class.getSimpleName();
 
     // 与存储区域有关系 设置ENDPOINT
-    private static final String ENDPOINT = "https://oss-cn-beijing.aliyuncs.com";
+    public static final String ENDPOINT = "https://oss-cn-beijing.aliyuncs.com";
 
     // 上传的仓库名
     private static final String BUCKET_NAME = "coca-chat";

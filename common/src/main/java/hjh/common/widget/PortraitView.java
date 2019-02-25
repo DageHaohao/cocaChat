@@ -13,7 +13,7 @@ import hjh.factory.modle.Author;
  * @author 黄君豪
  * @Title: PortraitView
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 圆形头像封装
  * @date 2018/12/25
  * 圆形头像
  */
