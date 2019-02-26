@@ -89,8 +89,13 @@ public class MsgCreateModel {
         return this.card;
     }
 
+    //同步到卡片的最新状态
     public void refreshByCard() {
-        // TODO: 2019/2/22 根据card 更改 modle 
+        if(card==null)
+            return;
+        //刷新内容和附件信息
+        this.content = card.getContent();
+        this.attach = card.getAttach();
     }
 
 

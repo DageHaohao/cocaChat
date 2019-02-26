@@ -120,6 +120,7 @@ public class LaunchActivity extends Activity {
         }
     }
 
+
     /**
      * 给背景设置一个动画
      *

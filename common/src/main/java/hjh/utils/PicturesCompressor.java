@@ -6,9 +6,9 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 
-import net.qiujuer.italker.common.app.Application;
-
 import java.io.File;
+
+import hjh.common.app.Application;
 
 
 /**

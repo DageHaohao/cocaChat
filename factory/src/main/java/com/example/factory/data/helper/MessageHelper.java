@@ -69,7 +69,7 @@ public class MessageHelper {
                 Factory.getMessageCenter().dispatch(card);
 
                 // 发送文件消息分两部：上传到云服务器，消息Push到我们自己的服务器
-                // TODO 如果是文件类型的（语音，图片，文件），需要先上传后才发送
+                // 如果是文件类型的（语音，图片，文件），需要先上传后才发送
                 if(card.getType()!=Message.TYPE_STR){
                     // 不是文字类型
                     if(card.getContent().startsWith(UploadHelper.ENDPOINT)){
@@ -219,5 +219,6 @@ public class MessageHelper {
                 .orderBy(Message_Table.createAt, false) // 倒序查询
                 .querySingle();
     }
+
 
 }

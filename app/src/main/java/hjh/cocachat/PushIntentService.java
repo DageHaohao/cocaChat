@@ -15,7 +15,7 @@ import com.igexin.sdk.message.GTTransmitMessage;
  * @author 91319
  * @Title: PushIntentService
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description:
  * @date 2019/1/21
  */
 public class PushIntentService extends GTIntentService {

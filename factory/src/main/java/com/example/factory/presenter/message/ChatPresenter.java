@@ -16,7 +16,7 @@ import java.util.List;
  * @author 91319
  * @Title: ChatPresenter
  * @ProjectName cocaChat
- * @Description: TODO 聊天Presenter的基础类
+ * @Description: 聊天Presenter的基础类
  * @date 2019/2/12
  */
 

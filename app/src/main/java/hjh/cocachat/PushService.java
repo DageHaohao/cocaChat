@@ -10,10 +10,9 @@ import com.igexin.sdk.GTServiceManager;
  * @author 91319
  * @Title: PushService
  * @ProjectName cocaChat
- * @Description: TODO
+ * @Description: 配置自定义推送服务（个推）
  * @date 2019/1/21
  *
- * 配置自定义推送服务（个推）
  *
  */
 public class PushService extends Service {
